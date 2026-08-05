@@ -14,7 +14,7 @@ jobs:
         run: echo "Welcome to our first GitHub Actions workflow"
      
       - name: checkout repository
-        uses: actions/checkout@v7.0.1
+        uses: devops_first/checkout@v7.0.1
 
       - name: list repo files
         run: ls -la

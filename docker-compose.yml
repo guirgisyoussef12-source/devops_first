@@ -1,11 +1,11 @@
-secrets:
+services:
     web:
       build: .
       command: > 
-        sh -c "python manage.py migrate && gunicorn todo.wsgi:application --bind
+         sh -c "python manage.py migrate && gunicorn todo.wsgi:application --bind 0.0.0.0:8000"
       volumes:
         - .:/app
-        - media:/app/media
+        - media_data
       ports:
         - "8000:8000"
       depends_on:
@@ -18,7 +18,7 @@ secrets:
         POSTGRES_USER: todo_user
         POSTGRES_PASSWORD: todo_password
       volumes:
-        - db_data:/var/lib/postgresql/data
+        - postgres_data
       healthcheck:
         test: ["CMD", "pg_isready", "-U", "todo_user"]
         interval: 10s
