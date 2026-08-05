@@ -28,3 +28,7 @@ jobs:
         run: |
           cd django-todo
           python manage.py test
+      - name: Build and run Docker Compose
+        run: |
+          cd django-todo
+          docker-compose up -d --build
