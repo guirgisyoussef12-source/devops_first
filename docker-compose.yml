@@ -1,0 +1,29 @@
+secrets:
+    web:
+      build: .
+      command: > 
+        sh -c "python manage.py migrate && gunicorn todo.wsgi:application --bind
+      volumes:
+        - .:/app
+        - media:/app/media
+      ports:
+        - "8000:8000"
+      depends_on:
+        db:
+          condition: service_healthy
+    db:
+      image: postgres:15.3
+      environment:
+        POSTGRES_DB: todo_db
+        POSTGRES_USER: todo_user
+        POSTGRES_PASSWORD: todo_password
+      volumes:
+        - db_data:/var/lib/postgresql/data
+      healthcheck:
+        test: ["CMD", "pg_isready", "-U", "todo_user"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+volumes:
+  postgres_data:
+  media_data:

@@ -1,0 +1,8 @@
+Django==6.0.3
+gunicorn
+psycopg2-binary==2.9.12
+pillow==12.2.0
+python-dotenv==1.2.1
+gunicorn==23.0.0
+django-widget-tweaks==1.5.1
+whitenoise==6.9.0
