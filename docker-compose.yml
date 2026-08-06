@@ -1,10 +1,7 @@
 services:
     web:
       build: .
-      command: > 
-          sh -c "python manage.py migrate && gunicorn todoApp.wsgi:application --bind 0.0.0.0:8000"
       volumes:
-        - .:/app
         - media_data:/app/media
       ports:
         - "8000:8000"
